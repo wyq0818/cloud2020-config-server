@@ -1,2 +1,2 @@
-server:
- port: 8888
+config:
+ info: 我是配置中心从git拉取的配置信息
