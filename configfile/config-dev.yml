@@ -1,2 +1,2 @@
 config:
- info: 我是配置中心从git拉取的配置信息
+  info: this is config info from config client
