@@ -1,2 +1,2 @@
 config:
-  info: this is config info from config client  mychange
+  info: this is config info from config client  mychange  curl_change
