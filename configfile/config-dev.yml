@@ -1,7 +1,7 @@
 config:
   info: no stop server edit config ,look business server change or no  version :3
 server:
-  port: 9005
+  port: 9002
 spring:
   application:
     name: wyq-config-client
