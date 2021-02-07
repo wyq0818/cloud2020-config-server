@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    gateway:
+      #开启从注册中心动态创建路由的功能，利用我服务的名进行路由
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: gateway-route
+        uri: lb://SSM-BOOT-PRODUCER
+        predicates:
+        - Path=/route
+        #- After=2021-01-12T14:22:25.234+08:00[Asia/Shanghai]  #在此时间之后的请求有效
+        #- Before=2021-03-12T14:22:25.234+08:00[Asia/Shanghai]  #在此时时间之前的请求有效
+        #- Between=2021-02-12T14:22:25.234+08:00[Asia/Shanghai],2021-03-12T14:22:25.234+08:00[Asia/Shanghai] #在此时间段之间的请求有效
+        #- Query=uname,wyq
