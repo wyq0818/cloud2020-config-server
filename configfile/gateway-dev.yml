@@ -1,16 +1,39 @@
+server:
+  port: 9655
 spring:
+  application:
+    name: wyq-gateway-server
   cloud:
     gateway:
-      #开启从注册中心动态创建路由的功能，利用我服务的名进行路由
+      #开启从注册中心匹配路由
       discovery:
         locator:
           enabled: true
-      routes:
-      - id: gateway-route
-        uri: lb://SSM-BOOT-PRODUCER
-        predicates:
-        - Path=/user/**
-        #- After=2021-01-12T14:22:25.234+08:00[Asia/Shanghai]  #在此时间之后的请求有效
-        #- Before=2021-03-12T14:22:25.234+08:00[Asia/Shanghai]  #在此时时间之前的请求有效
-        #- Between=2021-02-12T14:22:25.234+08:00[Asia/Shanghai],2021-03-12T14:22:25.234+08:00[Asia/Shanghai] #在此时间段之间的请求有效
-        #- Query=uname,wyq
+    ##配置中心客户端配置
+    config:
+      label: master #分支名称
+      name: gateway  #配置文件名称
+      profile: dev #文件后缀
+      uri: http://localhost:9666 #配置中心服务端地址
+      #上述四项综合：master分支上config-dev.yml的配置文件被读取。
+      #http://localhost:9666/master/config-dev.yml
+eureka:
+  instance:
+    instance-id: wyq-gateway-server
+    lease-renewal-interval-in-seconds: 1
+    lease-expiration-duration-in-seconds: 2
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+ribbon:
+  ConnectTimeout: 60000
+  ReadTimeout: 60000
+  eureka:
+    enabled: true
+#暴漏监控端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
