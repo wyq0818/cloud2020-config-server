@@ -1,3 +1,5 @@
+config:
+  info: wuyongqiang
 server:
   port: 9655
 spring:
